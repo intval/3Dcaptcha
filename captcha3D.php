@@ -1,9 +1,15 @@
 <?php
  
 /**
- * Used to generate 3d captchas
- * @author Alex Raskin <Alex@phpguide.co.il>
- */
+* Used to generate 3d captchas
+* @author Alex@phpguide.co.il
+* @version 1
+* @example
+
+	$c = new captcha3D();
+	$c->draw(); // or $c->draw('file.png');
+
+*/
 class captcha3D
 {
     protected $_text;
@@ -185,5 +191,3 @@ class captcha3D
 
 
 
-$captcha = new captcha3D('3D Text',600, 200, 18);
-$captcha->draw();
