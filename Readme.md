@@ -6,7 +6,9 @@ $captcha->draw();
 ![3dCaptcha](http://s18.postimage.org/pz1pb7vvt/a_php.png "3dCaptcha")
 
 
-This software is distributed under the BSD Lincence
+
+
+This software is distributed under the BSD Licence
 ----------------------------------------
 
 Copyright (c) 2012, Alexander Raskin
