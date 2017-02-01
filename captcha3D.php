@@ -6,7 +6,7 @@
 * @version 1
 * @example
 
-	$c = new captcha3D();
+	$c = new captcha3D(captcha3D::generateRandomString());
 	$c->draw(); // or $c->draw('file.png');
 
 */
@@ -16,6 +16,8 @@ class captcha3D
     protected $_conf;
     private $image = null;
     private $textCanvas;
+
+    const characters = '0123456789abcdefghijklmnopqrst-*!@#$uvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     /**
      * @param string $text text to write
@@ -36,6 +38,10 @@ class captcha3D
         $this->image = $this->generateCaptchaImage();
     }
 
+    static function generateRandomString($length = 4) {
+        return substr(str_shuffle(str_repeat($x=self::characters, ceil($length/strlen($x)) )),1,$length);
+    }
+
     /**
      * Either outputs or saves the image to a png file specified
      * @param $filename save path or null
@@ -44,6 +50,20 @@ class captcha3D
     {
         header("Content-type: image/png");
         imagepng($this->getImage(),$filename);
+    }
+
+    /**
+     * Either outputs <img> tag with embed BASE64 image
+     */
+    public function drawEmbed()
+    {
+        //header("Content-type: image/png");
+        ob_start();
+        imagepng($this->getImage(),null);
+        $image = ob_get_contents();
+        ob_end_clean();
+        $image = base64_encode($image);
+        echo '<img src="data:image/png;base64,'.$image.'" alt="some shit" />';
     }
 
     protected  function getImage()
